@@ -1,1 +1,1 @@
-# Pair-Programming-Modulo-2-sprint2
+# Pair-Programming-Modulo-2-Sprint2-BeatrizYRaquel
