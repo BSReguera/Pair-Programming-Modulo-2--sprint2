@@ -5,8 +5,17 @@ SELECT  'Hola!'  AS tipo_nombre
 FROM customers;
 
 -- 0. Base, obervamos que hay en cada tabla
+SELECT *
+FROM
+
+SELECT *
+FROM
+
 
 -- 1. Ciudades que empiezan con "A" o "B"
+SELECT
+FROM `customers`
+city
 
 -- 2. Número de pedidos que han hecho en las ciudades que empiezan con L
 
