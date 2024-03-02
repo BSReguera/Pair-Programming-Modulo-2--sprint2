@@ -1,6 +1,6 @@
 -- Pair programming -- SQL - Union Tablas (Joins)
 
--- BASE: 
+-- Base: 
 SELECT `pd`.`product_id`, SUM(`cantidad`), `precio`, `nombre producto`, SUM(`cantidad`) * `precio` AS `total`
 	FROM `pedidos` AS `pd` 
 	INNER JOIN `products` AS `pr`
@@ -22,7 +22,7 @@ SELECT `company_name`, `customer_id`, COUNT(`order_id`) AS "NumeroPedidos"
     GROUP BY `customer_id`;
     
 -- 2. Productos pedidos por empresa en UK por año
-SELECT `company_name`, YEAR(`order_date`) AS "Año" ,COUNT(`quantity`*`unit_price`) AS "NumObjetos"
+SELECT `company_name`, YEAR(`order_date`) AS "Año" ,SUM(`quantity`) AS "NumObjetos"
 	FROM `customers`
     NATURAL JOIN `orders`
     NATURAL JOIN `order_details`
@@ -30,7 +30,7 @@ SELECT `company_name`, YEAR(`order_date`) AS "Año" ,COUNT(`quantity`*`unit_pric
 	GROUP BY `company_name`, YEAR(`order_date`);
 
 -- 3. Mejorad la query anterior
-SELECT `company_name`, YEAR(`order_date`) AS "Año",  SUM(`quantity` * `unit_price`) AS "NumObjetos", `discount`AS "DineroTotal"
+SELECT `company_name`, YEAR(`order_date`) AS "Año",  SUM(`quantity`) AS "NumObjetos", SUM(`quantity` * `unit_price` * (1- `discount`)) AS "DineroTotal"
 	FROM `customers`
     NATURAL JOIN `orders`
     NATURAL JOIN `order_details`
@@ -40,18 +40,22 @@ SELECT `company_name`, YEAR(`order_date`) AS "Año",  SUM(`quantity` * `unit_pri
 -- 4. BONUS: Pedidos que han realizado cada compañía y su fecha
 SELECT `order_id`, `company_name`, `order_date`
 	FROM `orders`
-	JOIN `customers`;
-
+	NATURAL JOIN `customers`
+	GROUP BY `order_id`;
 
 -- 5. BONUS: Tipos de producto vendidos
-SELECT `product_id`, `product_name`, `category_id`, `category_name`
+SELECT `category_id`, `category_name`, `product_name`, `product_id`, SUM(`unit_price` * `quantity` * (1-`discount`/100))
 	FROM `products`
-	JOIN `categories`;
+	NATURAL JOIN `categories`
+    ON `category_id`= 
+    JOIN `order_details`
+    ON 
+    GROUP BY(`category_id`, `category_name`, `product_name`, `product_id`);
 
 -- 6. Qué empresas tenemos en la BBDD Northwind
 SELECT `order_id`, `company_name`, `order_date`
 	FROM `customers`
-	INNER JOIN `orders`;
+	INNER JOIN `orders` ON `order_id`= `company_name`;
 
 -- 7. Pedidos por cliente de UK
 SELECT `company_name`, COUNT(`quantity`) AS "NumeroPedidos"
