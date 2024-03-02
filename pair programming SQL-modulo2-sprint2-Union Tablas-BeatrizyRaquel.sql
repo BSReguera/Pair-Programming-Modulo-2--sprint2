@@ -22,44 +22,44 @@ SELECT `company_name`, `customer_id`, COUNT(`order_id`) AS "NumeroPedidos"
     GROUP BY `customer_id`;
     
 -- 2. Productos pedidos por empresa en UK por año
-SELECT `company_name`, YEAR(`order_date`) AS "Año" ,COUNT(`quantity`*`unit_price`) AS "NumObjetos"
+SELECT `company_name`, YEAR(`order_date`) AS "Año" ,SUM(`quantity`) AS "NumObjetos"
 	FROM `customers`
     NATURAL JOIN `orders`
     NATURAL JOIN `order_details`
     WHERE `country` = "UK"    
-	GROUP BY `company_name`, YEAR(`order_date`);
-
+	GROUP BY `customer_id`, YEAR(`order_date`);
+	
 -- 3. Mejorad la query anterior
-SELECT `company_name`, YEAR(`order_date`) AS "Año",  SUM(`quantity` * `unit_price`) AS "NumObjetos", `discount`AS "DineroTotal"
-	FROM `customers`
-    NATURAL JOIN `orders`
-    NATURAL JOIN `order_details`
-    WHERE `country` = "UK"    
-	GROUP BY `company_name`, YEAR(`order_date`);
-    
--- 4. BONUS: Pedidos que han realizado cada compañía y su fecha
-SELECT `order_id`, `company_name`, `order_date`
-	FROM `orders`
-	JOIN `customers`;
-
-
--- 5. BONUS: Tipos de producto vendidos
-SELECT `product_id`, `product_name`, `category_id`, `category_name`
-	FROM `products`
-	JOIN `categories`;
-
--- 6. Qué empresas tenemos en la BBDD Northwind
-SELECT `order_id`, `company_name`, `order_date`
-	FROM `customers`
-	INNER JOIN `orders`;
-
--- 7. Pedidos por cliente de UK
-SELECT `company_name`, COUNT(`quantity`) AS "NumeroPedidos"
+SELECT `company_name`, YEAR(`order_date`) AS "Año",  SUM(`quantity`) AS "NumObjetos", SUM(`quantity` * `unit_price` * (1- `discount`)) AS "DineroTotal"
 	FROM `customers`
     NATURAL JOIN `orders`
     NATURAL JOIN `order_details`
     WHERE `country` = "UK"
-    GROUP BY `company_name`;
+	GROUP BY `company_name`, YEAR(`order_date`);
+
+    
+-- 4. BONUS: Pedidos que han realizado cada compañía y su fecha
+SELECT `order_id`, `company_name`, `order_date`
+	FROM `orders` 
+	NATURAL JOIN `customers`
+	GROUP BY `order_id`;
+	
+
+-- 5. BONUS: Tipos de producto vendidos    
+
+    
+-- 6. Qué empresas tenemos en la BBDD Northwind
+SELECT `order_id`, `company_name`, `order_date`
+	FROM `orders` 
+	NATURAL JOIN `customers`
+	GROUP BY `order_id`;
+
+-- 7. Pedidos por cliente de UK
+SELECT `company_name` AS 'NombreCliente', COUNT(`order_id`) AS "NumeroPedidos"
+	FROM `customers`
+    NATURAL JOIN `orders`
+    WHERE `country` = "UK"
+    GROUP BY `customer_id`;
 
 -- 8. Empresas de UK y sus pedidos
 SELECT `order_id`,`company_name`, `order_date`
