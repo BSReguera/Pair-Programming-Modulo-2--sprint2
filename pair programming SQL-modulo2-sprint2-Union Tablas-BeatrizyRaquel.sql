@@ -40,7 +40,6 @@ SELECT `company_name`, YEAR(`order_date`) AS "Año",  SUM(`quantity`) AS "NumObj
     
 -- 4. BONUS: Pedidos que han realizado cada compañía y su fecha
 SELECT `order_id`, `company_name`, `order_date`
-<<<<<<< HEAD
 	FROM `orders`
 	NATURAL JOIN `customers`
 	GROUP BY `order_id`;
@@ -58,21 +57,6 @@ SELECT `category_id`, `category_name`, `product_name`, `product_id`, SUM(`unit_p
 SELECT `order_id`, `company_name`, `order_date`
 	FROM `customers`
 	INNER JOIN `orders` ON `order_id`= `company_name`;
-=======
-	FROM `orders` 
-	NATURAL JOIN `customers`
-	GROUP BY `order_id`;
-	
-
--- 5. BONUS: Tipos de producto vendidos    
-
-    
--- 6. Qué empresas tenemos en la BBDD Northwind
-SELECT `order_id`, `company_name`, `order_date`
-	FROM `orders` 
-	NATURAL JOIN `customers`
-	GROUP BY `order_id`;
->>>>>>> 3d1bf38d0d0ee776c41958206db1358b5ac02d97
 
 -- 7. Pedidos por cliente de UK
 SELECT `company_name` AS 'NombreCliente', COUNT(`order_id`) AS "NumeroPedidos"
