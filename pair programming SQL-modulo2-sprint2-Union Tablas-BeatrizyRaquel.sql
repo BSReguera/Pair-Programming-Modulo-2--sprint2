@@ -83,6 +83,7 @@ SELECT `o`.`order_id`, `o`.`order_date`, `c`.`company_name`
 	FROM `orders` AS `o`
 	RIGHT JOIN `customers` AS `c`
 	ON `o`.`customer_id` = `c`.`customer_id`;
+    
 -- Segunda opcion.  Uso de Join.
 SELECT `o`.`order_id`, `c`.`company_name` AS "NombreCliente", `o`.`order_date` AS "FechaPedido"
 FROM `orders` AS `o`
