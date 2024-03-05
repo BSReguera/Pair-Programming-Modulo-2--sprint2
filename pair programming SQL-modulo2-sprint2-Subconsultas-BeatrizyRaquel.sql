@@ -39,23 +39,11 @@ SELECT `country`
 GROUP BY `country`; 
     
 -- 5. Extraer los clientes que compraron mas de 20 articulos "Grandma's Boysenberry Spread"
-SELECT `customers_id`, `product_id`
-	FROM `products` AS `p`
-    WHERE  `product_id`>= 20 IN (SELECT `order_id`
-								FROM `order_details` AS `od`
-                                WHERE `p`.`product_id` = 6)
-GROUP BY `od`.`order_id`;
-    
-SELECT `product_id`,`customer_id` 
-	FROM `products` AS `p`
-    WHERE  `product_id` = 6;
-
-SELECT order_id, quantity
-	FROM order_details
-    WHERE quantity > 20;
-
-SELECT order_id, customer_id
-		FROM orders;
+SELECT `order_id`, `customer_id`
+FROM `orders`
+WHERE `order_id` IN (SELECT `order_id`
+		FROM `order_details`
+        WHERE  `product_id` = 6 AND `quantity` > 20);
         
 -- 6. Extraed los 10 productos más caros
 SELECT `product_name` AS 'Ten_Most_Expensive_Products' , `unit_price`
