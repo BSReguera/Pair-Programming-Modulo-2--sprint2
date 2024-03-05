@@ -46,15 +46,35 @@ SELECT `customers_id`, `product_id`
                                 WHERE `p`.`product_id` = 6)
 GROUP BY `od`.`order_id`;
     
-SELECT `product_id`,`customers_id` 
+SELECT `product_id`,`customer_id` 
 	FROM `products` AS `p`
     WHERE  `product_id` = 6;
 
+SELECT order_id, quantity
+	FROM order_details
+    WHERE quantity > 20;
+
+SELECT order_id, customer_id
+		FROM orders;
+        
 -- 6. Extraed los 10 productos más caros
-SELECT 
-	FROM
+SELECT `product_name` AS 'Ten_Most_Expensive_Products' , `unit_price`
+	FROM `products`
+    ORDER BY `unit_price` DESC
+    LIMIT 10
+    ;
     
 -- BONUS: 7. Qué producto es más popular
-SELECT 
-	FROM
+SELECT product_id, SUM(quantity)
+	FROM order_details 
+    GROUP BY product_id
+    ORDER BY SUM(quantity) DESC
+    LIMIT 1 ;
     
+SELECT product_name, product_id
+	FROM products
+    WHERE product_id IN (SELECT SUM(quantity)
+							FROM order_details 
+							GROUP BY product_id
+							ORDER BY SUM(quantity) DESC
+							LIMIT 1);
