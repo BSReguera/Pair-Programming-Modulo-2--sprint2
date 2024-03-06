@@ -49,20 +49,18 @@ WHERE `order_id` IN (SELECT `order_id`
 SELECT `product_name` AS 'Ten_Most_Expensive_Products' , `unit_price`
 	FROM `products`
     ORDER BY `unit_price` DESC
-    LIMIT 10
-    ;
+    LIMIT 10;
     
 -- BONUS: 7. Qué producto es más popular
 SELECT product_id, SUM(quantity)
-	FROM order_details 
+	FROM order_details
     GROUP BY product_id
     ORDER BY SUM(quantity) DESC
-    LIMIT 1 ;
-    
-SELECT product_name, product_id
-	FROM products
-    WHERE product_id IN (SELECT SUM(quantity)
-							FROM order_details 
-							GROUP BY product_id
-							ORDER BY SUM(quantity) DESC
-							LIMIT 1);
+    LIMIT 1;
+                       
+SELECT 
+    p.product_name,
+    (SELECT SUM(quantity) FROM order_details WHERE product_id = p.product_id) AS total_quantity
+FROM products p
+ORDER BY total_quantity DESC
+LIMIT 1;
