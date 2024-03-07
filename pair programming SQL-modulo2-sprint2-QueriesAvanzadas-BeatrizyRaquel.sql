@@ -11,7 +11,7 @@ SELECT COUNT(`product_id`), AVG(`unit_price`)
 -- 3. Sacad la máxima y mínima carga de los pedidos de UK. 
 SELECT MIN(`freight`), MAX(`freight`), `ship_country`
 	FROM `orders`
-    WHERE `ship_country` = 'UK';
+	WHERE `ship_country` = 'UK';
     
 -- 4. Qué productos se venden por encima del precio medio, ordenado de mayor a menor DESC    
 SELECT `product_id`, `product_name`, AVG(`unit_price`) AS 'MediumPrice'
@@ -61,10 +61,10 @@ SELECT `city`, COUNT(`employee_id`)
     
 -- 12.Cread una nueva columna basándonos en la cantidad monetaria:
 SELECT `order_id`, SUM(`unit_price` * `quantity`) AS 'TotalAmount',
-	CASE
-        WHEN SUM(`unit_price` * `quantity`) > 2000 THEN 'alto' 
-        ELSE 'bajo'
-    END AS 'TotalAmountCategory'
-FROM `order_details`
-GROUP BY `order_id`;
+		CASE
+        	WHEN SUM(`unit_price` * `quantity`) > 2000 THEN 'alto' 
+        	ELSE 'bajo'
+    	END AS 'TotalAmountCategory'
+	FROM `order_details`
+	GROUP BY `order_id`;
     
