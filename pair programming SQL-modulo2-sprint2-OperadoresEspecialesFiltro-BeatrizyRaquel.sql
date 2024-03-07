@@ -7,7 +7,6 @@ SELECT  'Hola!'  AS tipo_nombre
 -- 0. Base, obervamos que hay en cada tabla
 SELECT *
 	FROM `customers`;
-
 SELECT *
 	FROM `employees`;
 
@@ -44,7 +43,7 @@ UNION
 -- 6. Extraer todas las categorías de la tabla categories que contengan en la descripción "sweet" o "Sweet"
 SELECT `description`
 	FROM `categories`
-		WHERE `description` LIKE '%Sweet%' AND `description` LIKE '%sweet%';
+	WHERE `description` LIKE '%Sweet%' AND `description` LIKE '%sweet%';
 
 -- 7. Extraed todos los nombres y apellidos de los clientes y empleados que tenemos en la BBDD. Usando Concat. 
 -- NOTA: La función CONCAT en SQL se utiliza para combinar (concatenar) dos o más cadenas de texto en una sola cadena.

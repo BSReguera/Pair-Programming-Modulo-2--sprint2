@@ -4,7 +4,7 @@
 SELECT `pd`.`product_id`, SUM(`cantidad`), `precio`, `nombre producto`, SUM(`cantidad`) * `precio` AS `total`
 	FROM `pedidos` AS `pd` 
 	INNER JOIN `products` AS `pr`
-	ON `pd`.`product_id` = `pr`.`product_id`
+		ON `pd`.`product_id` = `pr`.`product_id`
 	WHERE `precio` < 50
 	GROUP BY `product_id`
 	HAVING `total` > 250;
@@ -42,9 +42,9 @@ SELECT `o`.`order_id`, `c`.`company_name`, `o`.`order_date`
 SELECT `c`.`category_id`, `c`.`category_name`, `pr`.`product_name`, SUM((`od`.`unit_price` - (`od`.`discount`* `od`.`unit_price`))* `od`.`quantity`) AS "ProductSales"
 	FROM `categories` AS `c`
 	INNER JOIN `products` AS `pr`
-	ON `c`.`category_id`= `pr`.`category_id`
+		ON `c`.`category_id`= `pr`.`category_id`
 	INNER JOIN `order_details` AS `od`
-	ON `pr`.`product_id` = `od`.`product_id`
+		ON `pr`.`product_id` = `od`.`product_id`
 	GROUP BY `pr`.`product_id`;
 
 -- 6. Qué empresas tenemos en la BBDD Northwind
@@ -77,16 +77,16 @@ SELECT `e`.`city`, `e`.`first_name` AS "NombreEmpleado", `e`.`last_name` AS "Ape
 SELECT `o`.`order_id`, `c`.`company_name` AS "NombreCliente" ,`o`.`order_date` AS "FechaPedido"
 	FROM `orders` AS `o`
 	LEFT JOIN `customers` AS `c`
-	ON `o`.`customer_id` = `c`.`customer_id`
+		ON `o`.`customer_id` = `c`.`customer_id`
 UNION
 SELECT `o`.`order_id`, `o`.`order_date`, `c`.`company_name`
 	FROM `orders` AS `o`
 	RIGHT JOIN `customers` AS `c`
-	ON `o`.`customer_id` = `c`.`customer_id`;
+		ON `o`.`customer_id` = `c`.`customer_id`;
     
 -- Segunda opcion.  Uso de Join.
 SELECT `o`.`order_id`, `c`.`company_name` AS "NombreCliente", `o`.`order_date` AS "FechaPedido"
 FROM `orders` AS `o`
 JOIN `customers` AS `c`
-ON `o`.`customer_id` = `c`.`customer_id`;
+	ON `o`.`customer_id` = `c`.`customer_id`;
 

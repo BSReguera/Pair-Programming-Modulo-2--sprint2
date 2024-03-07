@@ -1,5 +1,10 @@
+-- Pair programming -- SQL - Queries Básicas
+
+-- 0. Creacion del esquema
 CREATE SCHEMA `northwind`;
--- 1 + 2 + 3 = Descarga e instalacion de la BBDD
+
+-- 1 + 2 + 3. Descarga e instalacion de la BBDD
+
 -- 4. Conociendo a las empleadas
 SELECT `employee_id`, `last_name`, `first_name`
 	FROM `employees`;

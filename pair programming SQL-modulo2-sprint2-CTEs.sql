@@ -1,5 +1,5 @@
--- Pair Programming - CTEs
-    
+-- Pair Programming -- SQL - CTEs
+
 -- 1. Extraer en una CTE todos los nombres de las compañias y los id de los clientes.
 WITH `clientes` AS (SELECT `customer_id`, `company_name`
 						FROM `customers`)
@@ -44,31 +44,27 @@ SELECT `category_name`, `media`, `maximo`, `minimo`
 		ON `cte_category`.`category_id`= `c`. `category_id`;
 
 -- 7. La empresa nos ha pedido que busquemos el nombre de cliente, su teléfono y el número de pedidos que ha hecho cada uno de ellos.
-WITH `cte_clientes_pedidos`AS (
-	SELECT `customer_id`, COUNT(`order_id`) AS "Numpedidos"
-		FROM `orders`
-		GROUP BY `customer_id`)
+WITH `cte_clientes_pedidos`AS (SELECT `customer_id`, COUNT(`order_id`) AS "Numpedidos"
+									FROM `orders`
+									GROUP BY `customer_id`)
 SELECT `c`.`contact_name`, `c`.`phone`,`c`.`customer_id`, `p`.`Numpedidos`
 	FROM `customers` AS `c`
 	INNER JOIN `cte_clientes_pedidos`AS `p`
 		ON `c`.`customer_id` = `p`.`customer_id`; 
 
 -- 8. Modifica la consulta anterior para obtener los mismos resultados pero con los pedidos por año que ha hecho cada cliente.
-WITH `cte_clientes_pedidos`AS (
-	SELECT `customer_id`, YEAR(`order_date`) AS "año", COUNT(`order_id`) AS "Numpedidos"
-		FROM `orders`
-		GROUP BY `customer_id`,YEAR(`order_date`))
+WITH `cte_clientes_pedidos`AS (SELECT `customer_id`, YEAR(`order_date`) AS "año", COUNT(`order_id`) AS "Numpedidos"
+									FROM `orders`
+									GROUP BY `customer_id`,YEAR(`order_date`))
 SELECT `c`.`contact_name`, `c`.`phone`,`c`.`customer_id`, `p`.`año`,`p`.`Numpedidos`
 	FROM `customers` AS `c`
 	INNER JOIN `cte_clientes_pedidos`AS `p`
 		ON `c`.`customer_id` = `p`.`customer_id`; 
 
 -- 9. Modifica la cte del ejercicio anterior, úsala en una subconsulta para saber el nombre del cliente y su teléfono, para aquellos clientes que hayan hecho más de 6 pedidos en el año 1998.
-WITH `cte_clientes_pedidos`AS (
-	SELECT `customer_id`, YEAR(`order_date`) AS "año", COUNT(`order_id`) AS "Numpedidos"
-		FROM `orders`
-		GROUP BY `customer_id`,YEAR(`order_date`))
-    
+WITH `cte_clientes_pedidos`AS (SELECT `customer_id`, YEAR(`order_date`) AS "año", COUNT(`order_id`) AS "Numpedidos"
+									FROM `orders`
+									GROUP BY `customer_id`,YEAR(`order_date`))
 SELECT `c`.`contact_name`, `c`.`phone`, `p`.`año`,`p`.`Numpedidos`
 	FROM `customers` AS `c`
 	INNER JOIN (SELECT `customer_id`,`p`.`año`,`p`.`Numpedidos`

@@ -1,6 +1,7 @@
--- Pair programming - Queries Avanzadas
+-- Pair programming -- SQL - Queries Avanzadas
+
 -- 1. Productos más baratos y caros de nuestra BBDD. Recibir el alias lowestPrice y highestPrice.
-SELECT MIN(`unit_price`) AS lowestPrice, MAX(`unit_price`) AS highestPrice
+SELECT MIN(`unit_price`) AS 'lowestPrice', MAX(`unit_price`) AS 'highestPrice'
 	FROM `products`;
     
 -- 2. Conociendo el numero de productos y su precio medio (en general).
@@ -21,8 +22,8 @@ SELECT `product_id`, `product_name`, AVG(`unit_price`) AS 'MediumPrice'
     
 -- 5. Qué productos se han descontinuado
 SELECT COUNT(*)
-FROM `products`
-WHERE Discontinued = 1;
+	FROM `products`
+	WHERE Discontinued = 1;
     
 -- 6. Detalles de los productos no descontinuados, el ProductID y ProductName. Con limite a los 10 con ID más elevado.
 SELECT `product_id`, `product_name`
