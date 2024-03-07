@@ -1,4 +1,4 @@
--- Pair programming -- SQL - Queries Avanzadas
+-- Pair programming -- SQL -- Queries Avanzadas
 
 -- 1. Productos más baratos y caros de nuestra BBDD. Recibir el alias lowestPrice y highestPrice.
 SELECT MIN(`unit_price`) AS 'lowestPrice', MAX(`unit_price`) AS 'highestPrice'

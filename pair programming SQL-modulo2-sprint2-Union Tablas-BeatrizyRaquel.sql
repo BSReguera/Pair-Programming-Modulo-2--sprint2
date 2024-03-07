@@ -1,4 +1,4 @@
--- Pair programming -- SQL - Union Tablas (Joins)
+-- Pair programming -- SQL -- Union Tablas (Joins)
 
 -- Base: 
 SELECT `pd`.`product_id`, SUM(`cantidad`), `precio`, `nombre producto`, SUM(`cantidad`) * `precio` AS `total`

@@ -1,4 +1,4 @@
--- Pair Programming -- SQL - CTEs
+-- Pair Programming -- SQL -- CTEs
 
 -- 1. Extraer en una CTE todos los nombres de las compañias y los id de los clientes.
 WITH `clientes` AS (SELECT `customer_id`, `company_name`
@@ -72,7 +72,7 @@ SELECT `c`.`contact_name`, `c`.`phone`, `p`.`año`,`p`.`Numpedidos`
 					WHERE `año` = 1998 AND `Numpedidos` > 6) AS `p` 
 		ON `c`.`customer_id` = `p`.`customer_id`; 
 
--- 10 Nos piden que obtengamos el importe total (teniendo en cuenta los descuentos) de cada pedido de la tabla orders y el customer_id asociado a cada pedido.
+-- 10 Nos piden que obtengamos el importe total (teniendo en cuenta los descuentos) de cada pedido de la tabla orders y el customer_id asociado a cada pedido. 
 WITH `cte_total_amount` AS (SELECT `order_id`, SUM(`unit_price` * `quantity` * (1 - `discount`)) AS "Total_amount"
 								FROM `order_details`AS `od`
 								GROUP BY `order_id`)

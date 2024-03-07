@@ -1,4 +1,4 @@
--- Pair programming -- SQL - Subconsultas
+-- Pair programming -- SQL -- Subconsultas
 
 -- 0. Observamos las tablas a usar
 SELECT *

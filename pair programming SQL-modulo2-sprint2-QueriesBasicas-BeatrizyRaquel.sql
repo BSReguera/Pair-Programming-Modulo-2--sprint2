@@ -1,4 +1,4 @@
--- Pair programming -- SQL - Queries Básicas
+-- Pair programming -- SQL -- Queries Básicas
 
 -- 0. Creacion del esquema
 CREATE SCHEMA `northwind`;

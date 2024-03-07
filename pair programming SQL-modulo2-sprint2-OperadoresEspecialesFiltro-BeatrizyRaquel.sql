@@ -1,4 +1,4 @@
--- Pair programming -- SQL - Operadores Especiales de Filtro
+-- Pair programming -- SQL -- Operadores Especiales de Filtro
 
 -- 0. Creacion de columna temporal. 
 SELECT  'Hola!'  AS tipo_nombre
