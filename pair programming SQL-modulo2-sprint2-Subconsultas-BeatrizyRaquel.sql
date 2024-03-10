@@ -16,19 +16,18 @@ SELECT `order_id`, `customer_id`, `employee_id`, `order_date`, `required_date`
 SELECT MAX(`order_date`)
 	FROM `orders` AS `o2`
 	WHERE  `o2`.`employee_id` = 5;
+
     
 -- 2. Extraed el precio unitario máximo (unit_price) de cada producto vendido.
-SELECT `od1`.`product_id`, `od1`.`unit_price` AS "Maxunitprice"
-	FROM `order_details` AS `od1`
-    WHERE `od1`.`unit_price` IN (SELECT MAX(`od2`.`unit_price`)
-									FROM `order_details` AS `od2`
-									WHERE `od1`.`product_id` = `od2`.`product_id`)
-	GROUP BY `od1`.`product_id`,`od1`.`unit_price`;
+SELECT `product_id`, MAX(`unit_price`)
+	FROM `order_details`
+    GROUP BY `product_id`
   
 -- 3. Extraed información de los productos "Beverages"
-SELECT `product_id`, `product_name`, `category_id`
+SELECT `product_id`, `product_name`, `products`.`category_id`
 	FROM `products`
-    WHERE `category_id` = 1; 
+    INNER JOIN `categories` ON `products`.`category_id` = `categories`.`category_id`
+    WHERE `category_name` = 'Beverages'
  
 -- 4. Extraed la lista de países donde viven los clientes, pero no hay ningún proveedor ubicado en ese país
 SELECT `country`
